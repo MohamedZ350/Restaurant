@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SONO Restaurant</title>
+  <link rel="icon" href="logo-removebg.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body>main {
+      flex: 1;
+    }
+
+    body {
+      background: url('fondec2.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #f5f5dc;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px 40px;
+    }
+
+    .navbar-brand img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #f7c797;
+    }
+
+    .navbar-nav .nav-link {
+      color: #3a2b22 !important;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #d4a373 !important;
+    }
+
+    .filter-btn {
+      border-radius: 20px;
+      padding: 5px 15px;
+      font-size: 0.9rem;
+      background-color: #f5f3eb;
+      color: #5c3a21;
+      border: 1px solid #5c3a21;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background-color: #5c3a21;
+      color: white;
+    }
+
+    .card-recipe {
+      border-radius: 15px;
+      overflow: hidden;
+      background: #fffdf8;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s;
+      padding-bottom: 10px;
+    }
+
+    .card-recipe:hover {
+      transform: translateY(-5px);
+    }
+
+    .recipe-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+
+    .recipe-title {
+      font-weight: bold;
+      color: #5c3a21;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .recipe-info {
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 5px;
+    }
+
+    .recipe-price {
+      font-size: 0.85rem;
+      color: #5c3a21;
+      background-color: #f5f3eb;
+      border-radius: 10px;
+      display: inline-block;
+      padding: 4px 10px;
+      margin-top: 5px;
+      font-weight: 500;
+    }
+
+    .stars {
+      color: #ffc107;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .search-bar {
+      border-radius: 30px;
+      border: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 10px 20px;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg position-relative"> <!-- Make navbar position-relative -->
+    <div class="container-fluid justify-content-center align-items-center">
+
+      <!-- Left side links -->
+      <ul class="navbar-nav d-flex flex-row me-3">
+        <li class="nav-item">
+          <a class="nav-link" href="Reservation.php">Reservations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#menu">Menus</a>
+        </li>
+      </ul>
+
+      <!-- Centered logo -->
+      <a class="navbar-brand mx-3" href="#">
+        <img src="logo.jpeg" alt="Logo" />
+      </a>
+
+      <!-- Right side links -->
+      <ul class="navbar-nav d-flex flex-row ms-3 align-items-center">
+        <li class="nav-item">
+          <a class="nav-link" href="events.html">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.php">Contact</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Absolutely positioned profile icon in top-right -->
+    <div class="position-absolute top-50 translate-middle-y end-0 me-4">
+      <a class="nav-link d-flex flex-column align-items-center text-decoration-none" href="Register.php"
+        style="color: #3a2b22;">
+        <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
+        <span style="font-size: 0.8rem;">Profile</span>
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container py-5">
+      <h4 class="fw-bold text-white">Restaurant <span class="text-primary">SONO</span></h4>
+      <input type="text" class="form-control search-bar" id="search" placeholder="Search dishes...">
+      <div class="mb-4 d-flex flex-wrap gap-2">
+        <button class="btn filter-btn active" id="btnAll">All</button>
+      </div>
+      <div class="row g-4">
+        <!-- Cards go here -->
+        <!-- Card 1 -->
+
+        <div class="container py-4">
+          <div class="row g-4">
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P1.jpg" alt="Recipe 1" class="recipe-img">
+                <div class="recipe-title">Buffet fondue</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">30 min · 250 cal</div>
+                <div class="recipe-price">Price: <strong>80 DH</strong></div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P2.jpg" alt="Recipe 2" class="recipe-img">
+                <div class="recipe-title">Soupe de legumes </div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">25 min · 300 cal</div>
+                <div class="recipe-price">Price: <strong>40 DH</strong></div>
+
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P3.jpg" alt="Recipe 3" class="recipe-img">
+                <div class="recipe-title">English breakfast</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">20 min · 200 cal</div>
+                <div class="recipe-price">Price: <strong>50 DH</strong></div>
+
+              </div>
+            </div>
+
+
+            <!-- Card 4 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P4.jpg" alt="Recipe 1" class="recipe-img">
+                <div class="recipe-title">Croissant sandwich</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">30 min · 250 cal</div>
+                <div class="recipe-price">Price: <strong>30 DH</strong></div>
+
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P5.jpg" alt="Recipe 2" class="recipe-img">
+                <div class="recipe-title">Box viennoiseries & pâtisserie</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">25 min · 300 cal</div>
+                <div class="recipe-price">Price: <strong>60 DH</strong></div>
+
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P6.jpg" alt="Recipe 3" class="recipe-img">
+                <div class="recipe-title">Box macarons</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">20 min · 200 cal</div>
+                <div class="recipe-price">Price: <strong>60 DH</strong></div>
+
+              </div>
+            </div>
+            <!-- Card 7-->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P7.jpg" alt="Recipe 1" class="recipe-img">
+                <div class="recipe-title">Donut b Lotus biscuit</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">30 min · 250 cal</div>
+                <div class="recipe-price">Price: <strong>50 DH</strong></div>
+
+              </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P8.jpg" alt="Recipe 2" class="recipe-img">
+                <div class="recipe-title">Pain aux raisins</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">25 min · 300 cal</div>
+                <div class="recipe-price">Price: <strong>20 DH</strong></div>
+
+              </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P9.jpg" alt="Recipe 3" class="recipe-img">
+                <div class="recipe-title">Smoothie dyal berries</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">20 min · 200 cal</div>
+                <div class="recipe-price">Price: <strong>40 DH</strong></div>
+
+              </div>
+            </div>
+            <!-- Card 10 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P10.jpg" alt="Recipe 1" class="recipe-img">
+                <div class="recipe-title">Smoothie dyal fruits rouges</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">30 min · 250 cal</div>
+                <div class="recipe-price">Price: <strong>30 DH</strong></div>
+
+              </div>
+            </div>
+
+            <!-- Card 11 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P11.jpg" alt="Recipe 2" class="recipe-img">
+                <div class="recipe-title">Atay</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">25 min · 300 cal</div>
+                <div class="recipe-price">Price: <strong>20 DH</strong></div>
+
+              </div>
+            </div>
+
+            <!-- Card 12 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P12.jpg" alt="Recipe 3" class="recipe-img">
+                <div class="recipe-title">Stake </div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">20 min · 200 cal</div>
+                <div class="recipe-price">Price: <strong>50 DH</strong></div>
+
+              </div>
+            </div>
+            <!-- Card 13 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P13.jpg" alt="Recipe 1" class="recipe-img">
+                <div class="recipe-title">Harira</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">30 min · 250 cal</div>
+                <div class="recipe-price">Price: <strong>30 DH</strong></div>
+
+              </div>
+            </div>
+
+            <!-- Card 14 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P14.jpg" alt="Recipe 2" class="recipe-img">
+                <div class="recipe-title">Djaj mhmer in tagin </div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">25 min · 300 cal</div>
+                <div class="recipe-price">Price: <strong>50 DH</strong></div>
+
+              </div>
+            </div>
+
+            <!-- Card 15 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P15.jpg" alt="Recipe 3" class="recipe-img">
+                <div class="recipe-title">Msmen</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">20 min · 200 cal</div>
+                <div class="recipe-price">Price: <strong>30 DH</strong></div>
+
+              </div>
+            </div>
+            <!-- Card 16 -->
+            <div class="col-6 col-md-3">
+              <div class="card-recipe text-center">
+                <img src="P16.jpg" alt="Recipe 1" class="recipe-img">
+                <div class="recipe-title">Coffee</div>
+                <div class="stars">★★★★☆</div>
+                <div class="recipe-info">30 min · 250 cal</div>
+                <div class="recipe-price">Price: <strong>30 DH</strong></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="search.js"></script>
+</body>
+
+</html>
